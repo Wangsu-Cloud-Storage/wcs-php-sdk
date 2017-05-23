@@ -1,0 +1,18 @@
+{
+    "name": "wcs/wcs-sdk-php",
+    "description": "wcs sdk for php",
+    "keywords": ["wcs", "storage", "sdk","php", "cloud"],
+    "homepage": "https://wcs.chinanetcenter.com/document/API",
+    "authors": [
+        {
+            "name": "wcs",
+            "email": "cdn_sm_storage_mkt@chinanetcenter.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "autoload": {
+        "psr-4": {"Wcs\\": "src/Wcs"}
+    }
+}
