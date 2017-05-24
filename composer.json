@@ -1,12 +1,12 @@
 {
-    "name": "wcs/wcs-sdk-php",
+    "name": "wangsucs/wcs-sdk-php",
     "description": "wcs sdk for php",
-    "keywords": ["wcs", "storage", "sdk","php", "cloud"],
-    "homepage": "https://wcs.chinanetcenter.com/document/API",
+    "keywords": ["wcs", "storage", "sdk", "php", "cloud"],
+    "homepage": "https://wcs.chinanetcenter.com/document/Guide",
     "authors": [
         {
             "name": "wcs",
-            "email": "cdn_sm_storage_mkt@chinanetcenter.com"
+            "email": "CLOUD_STOR_PUB@chinanetcenter.com"
         }
     ],
     "require": {
