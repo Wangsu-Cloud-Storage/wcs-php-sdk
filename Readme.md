@@ -1,4 +1,4 @@
-#wcs-php-sdk v2.0.1
+#wcs-php-sdk
 
 
 这是php SDK基于网宿云API规范构建，（php环境满足php >= 5.6）。
