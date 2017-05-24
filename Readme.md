@@ -21,7 +21,7 @@
 
 ```
 "require": {
-     "wcs/wcs-sdk-php": "@dev"
+     "wcs/wcs-sdk-php": "~2.0"
  }
 ```
 
