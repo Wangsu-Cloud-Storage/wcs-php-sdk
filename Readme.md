@@ -1,4 +1,4 @@
-#wcs-php-sdk
+# wcs-php-sdk v2.0.1
 
 
 这是php SDK基于网宿云API规范构建，（php环境满足php >= 5.6）。
@@ -15,7 +15,7 @@
     *   [Fmgr](#10)
 
 
-###安装
+### 安装
 
 1.通过composer管理项目依赖
 
@@ -28,11 +28,11 @@
 2.手动下载
 [wcs-php-sdk下载链接](http://localhost/link)
 
-##<span id="3">使用指南</span>
-###准备开发环境
+## <span id="3">使用指南</span>
+### 准备开发环境
 *   php版本满足 php >= 5.5
 
-###<span id="4">配置信息</span>
+### <span id="4">配置信息</span>
 要接入网宿云存储，您需要拥有一对有效的AK和SK进行签名认证，填写上传、管理域名信息进行文件操作，您只需要在整个应用程序中初始化一次信息即可。可以通过如下步骤：
 
 *   开通网宿云存储平台账户
@@ -88,7 +88,7 @@ etag计算算法
     2. 如果文件 > 4M，则 hash = UrlsafeBase64([0x96, sha1([sha1(Block1), sha1(Block2), ...])])，其中 Block 是把文件内容切分为 4M 为单位的一个个块，也就是 BlockI = FileContent[I*4M:(I+1)*4M]。
 
 
-###<span id="6">文件上传</span>
+### <span id="6">文件上传</span>
 1.  普通上传
 2.  回调上传
 3.  通知上传
@@ -119,10 +119,10 @@ etag计算算法
     $client = new ResumeUploader($token, $userParam, $userVars, $mimeType);
 
 
-#####上传进度信息
+##### 上传进度信息
 普通上传、回调上传、通知上传均是一次性上传
 
-####1.  普通上传(POST方式上传)
+#### 1.  普通上传(POST方式上传)
 
 上传返回结果由云存储平台统一控制，规范统一化，详见网宿云存储API规范。 注意：
 
@@ -164,10 +164,10 @@ etag计算算法
 
     $ php file_upload_return.php [-h | --help] -b <bucketName> -f <fileKey> -l <localFile> [-r <returnBody>] [-u <userParam>] [-v <userVars>] [-m <mimeType>]
 
-#####比如：
+##### 比如：
     $ php file_upload_return.php -b test -f test.png -l test.png -r {test}
 
-####2.  回调上传（POST方式）
+#### 2.  回调上传（POST方式）
 上传文件后，对返回给客户端的信息进行自定义格式时，详见网宿云存储API规范。需要启用上传策略数据的callbackUrl参数,而callbackBody参数可选（建议使用该参数）。
 >注意：returnUrl和callbackUrl不能同时指定。
 
@@ -207,7 +207,7 @@ etag计算算法
 
     $ php file_upload_callback.php [-h | --help] -b <bucketName> -f <fileKey> -l <localFile> -c <callbackUrl> [-r <returnBody>] [-u <userParam>] [-v <userVars>] [-m <mimeType>]
 
-####3.  通知上传 （POST方式）
+#### 3.  通知上传 （POST方式）
 用户在上传文件时，提交文件处理指令（包括视频转码，图片水印，图片缩放等操作），要求云存储平台对上传的文件进行处理，由于这些处理操作一般比较耗费时间，为了不影响客户端的体验，云存储平台采用异步处理策略，处理过程异步执行，处理完成结果将采用异步通知方式告知企业的WEB服务系统，由企业的WEB系统再与客户端进行交互，完成处理通知整个流程，详见网宿云存储API规范。需要启用上传策略数据的persistentOps参数和persistentNotifyUrl参数。
 
 范例：
@@ -245,7 +245,7 @@ etag计算算法
     $ php file_upload_notify.php [-h | --help] -b <bucketName> -f <fileKey> -l <localFile> -n <notifyUrl> -c <cmd> [-u <userParam>] [-v <userVars>] [-m <mimeType>]
 
 
-####4.  流地址上传 （POST方式）
+#### 4.  流地址上传 （POST方式）
 用户在上传文件时，提交文件的流地址，SDK通过流地址获取文件二进制流，然后通过mulitpart/form形式上传。
 
 在上传之前需要配置虚拟内存磁盘：
@@ -407,11 +407,11 @@ etag计算算法
 
     $ php file_upload_resume.php [-h | --help] -b <bucketName> -f <fileKey> -l <localFile> [-u <userParam>] [-v <encodeUserVars>] [-m <mimeType>]
 
-#####分片上传成功返回结果
+##### 分片上传成功返回结果
 
     {"key":"test0.mp4","hash":"lrV8ZZRKgjHAE0JX6Y8iXxU3x0eJ"}
 
-#####请求失败
+##### 请求失败
 
     {
         "code":     "<code string>",
@@ -419,7 +419,7 @@ etag计算算法
     }
 
 
-###<span id="7">资源管理</span>
+### <span id="7">资源管理</span>
 提供对文件的基本操作：
 1.   删除文件
 2.   获取文件信息
@@ -431,7 +431,7 @@ etag计算算法
 8.   获取音视频简单元数据
 
 
-####1.  删除文件
+#### 1.  删除文件
 范例：
 
     require '../vendor/autoload.php';
@@ -451,7 +451,7 @@ etag计算算法
     $ php file_delete.php [-h | --help] -b <bucketName> -f <fileKey>
 
 
-####2.  获取文件信息
+#### 2.  获取文件信息
 范例：
 
     require '../vendor/autoload.php';
@@ -471,7 +471,7 @@ etag计算算法
 
     $ php file_stat.php [-h | --help] -b <bucketName> -f <fileKey>
 
-####3.  列举资源
+#### 3.  列举资源
 范例：
 
     require '../vendor/autoload.php';
@@ -492,7 +492,7 @@ etag计算算法
 
     $ php file_list.php [-h | --help] -b <bucketName> [-l <limit>] [-p <prefix>] [-m <mode>] [--ma <marker>]
 
-####4.  更新镜像资源
+#### 4.  更新镜像资源
 范例：
 
     require '../vendor/autoload.php';
@@ -513,7 +513,7 @@ etag计算算法
 
     $ php updateMirrorSrc.php [-h | --help] -b <bucket> -f [<fileKey1>|<fileKey2>|<fileKey3>...]
 
-####5.  移动资源
+#### 5.  移动资源
 范例：
 
     require '../vendor/autoload.php';
@@ -533,7 +533,7 @@ etag计算算法
 
     $ php file_move.php [-h | --help] --bs <bucketSrc> --ks <keyStr> --bd <bucketDst> --kd <keyDst>
 
-####6.  复制资源
+#### 6.  复制资源
 范例：
 
     require '../vendor/autoload.php';
@@ -554,7 +554,7 @@ etag计算算法
     $ php file_copy.php [-h | --help] --bs <bucketSrc> --ks <keyStr> --bd <bucketDst> --kd <keyDst>
 
 
-####7.  获取音视频元数据
+#### 7.  获取音视频元数据
 范例：
 
     require '../vendor/autoload.php';
@@ -574,7 +574,7 @@ etag计算算法
 
     php avinfo.php [-h | --help] -k <key>
 
-####8.  获取音视频简单元数据
+#### 8.  获取音视频简单元数据
 范例：
 
     require '../vendor/autoload.php';
@@ -595,7 +595,7 @@ etag计算算法
 
     $ php avinfo2.php [-h | --help] -k <key>
 
-####9.  设置文件保存期限
+#### 9.  设置文件保存期限
 范例：
 
     require '../../vendor/autoload.php';
@@ -616,9 +616,9 @@ etag计算算法
     $ php file_setDeadLine.php [-h | --help] -b <bucketName> -f <fileKey> -d <deadline>
 
 
-###<span id="8">直播录制文件处理</span>
+### <span id="8">直播录制文件处理</span>
 
-####1.  直播录制文件查询
+#### 1.  直播录制文件查询
 范例：
 
     require '../../vendor/autoload.php';
@@ -638,7 +638,7 @@ etag计算算法
 
     php wslive_list.php [-h | --help] -c <channelname> -s <startTime> -e <endTime> -b <bucket> [-S <start>] [-L <limit>]
 
-###<span id="8">图片处理</span>
+### <span id="8">图片处理</span>
 图片处理的相关接口，主要有
 1.   图片缩放
 2.   图片水印
@@ -647,7 +647,7 @@ etag计算算法
 6.  获取图片基本信息
 7.  获取图片EXIF信息
 
-####1.  图片缩放
+#### 1.  图片缩放
 
     require '../../vendor/autoload.php';
     use Wcs\ImageProcess\ImageView;
@@ -663,7 +663,7 @@ etag计算算法
 
     print_r($client->exec($bucketName, $fileName));
 
-#####2. 图片水印
+##### 2. 图片水印
 
     require '../vendor/autoload.php';
     use Wcs\ImageProcess\ImageWatermark;
@@ -684,7 +684,7 @@ etag计算算法
 
     print_r($client->exec($bucketName, $fileName, $localFile));
 
-####3.  文字水印
+#### 3.  文字水印
 
     require '../vendor/autoload.php';
     use Wcs\ImageProcess\ImageWatermark;
@@ -707,7 +707,7 @@ etag计算算法
     print_r($client->exec($bucketName, $fileName, $localFile));
 
 
-####4.  高级图片处理
+#### 4.  高级图片处理
 
     require '../../vendor/autoload.php';
     use Wcs\ImageProcess\ImageMogr;
@@ -720,7 +720,7 @@ etag计算算法
     print_r($client->exec($bucketName, $fileName));
 
 
-####5.  获取图片基本信息
+#### 5.  获取图片基本信息
 
     require '../../vendor/autoload.php';
     use \Wcs\ImageProcess\ImageInfo;
@@ -730,7 +730,7 @@ etag计算算法
     print_r($res->code." ".$res->respBody);
 
 
-####6.  获取图片EXIF信息
+#### 6.  获取图片EXIF信息
 
     require '../../vendor/autoload.php';
     use \Wcs\ImageProcess\ImageInfo;
@@ -739,11 +739,11 @@ etag计算算法
     $res = $client->imageEXIF($bucketName, $fileName);
     print_r($res->code." ".$res->respBody);
 
-###<span id="9">持久化操作</span>
+### <span id="9">持久化操作</span>
 1.  fops操作
 2.  fops查询
 
-####1.  fops操作
+#### 1.  fops操作
     require '../../vendor/autoload.php';
     use \Wcs\PersistentFops\Fops;
     use \Wcs\Config;
@@ -770,7 +770,7 @@ etag计算算法
     $res = $client->exec($fops, $key, $notifyURL, $force, $separate);
     print_r($res->code." ".$res->respBody);
 
-####2.  fops查询
+#### 2.  fops查询
 
     require '../../vendor/autoload.php';
     use \Wcs\PersistentFops\Fops;
@@ -778,7 +778,7 @@ etag计算算法
     $res = Fops::status($persisetntId);
     print_r($res->code." ".$res->respBody);
 
-###<span id="10">Fmgr操作</span>
+### <span id="10">Fmgr操作</span>
 
 *   抓取资源
 *   复制资源
@@ -787,7 +787,7 @@ etag计算算法
 *   按前缀删除资源
 *   fmgr任务查询
 
-####1.  抓取资源
+#### 1.  抓取资源
 
     require '../../vendor/autoload.php';
     use \Wcs\Fmgr\Fmgr;
@@ -815,7 +815,7 @@ etag计算算法
     $res = $client->fetch($fops);
     print_r($res->code." ".$res->respBody);
 
-####2.  复制资源
+#### 2.  复制资源
 
     // 请先填写相关字段,$fops字段格式详见wcs api 文档
     require '../../vendor/autoload.php';
@@ -844,7 +844,7 @@ etag计算算法
     $res = $client->copy($fops);
     print_r($res->code." ".$res->respBody);
 
-####3.   移动资源
+#### 3.   移动资源
 
     // 请先填写相关字段,$fops字段格式详见wcs api 文档
     require '../../vendor/autoload.php';
@@ -873,7 +873,7 @@ etag计算算法
     $client->move($fops);
     print_r($res->code." ".$res->respBody);
 
-####4.   删除资源
+#### 4.   删除资源
 
     // 请先填写相关字段,$fops字段格式详见wcs api 文档
     require '../../vendor/autoload.php';
@@ -900,7 +900,7 @@ etag计算算法
     $res = $client->delete($fops);
     print_r($res->code." ".$res->respBody);
 
-####5.   按前缀删除资源
+#### 5.   按前缀删除资源
 
 
     // 请先填写相关字段,$fops字段格式详见wcs api 文档
@@ -929,7 +929,7 @@ etag计算算法
     $res = $client->deletePrefix($fops);
     print_r($res->code." ".$res->respBody);
 
-####6.  fmgr任务查询
+#### 6.  fmgr任务查询
 
     // 请先填写相关字段,$fops字段格式详见wcs api 文档
     require '../../vendor/autoload.php';
