@@ -26,7 +26,7 @@
 ```
 
 2.手动下载
-[wcs-php-sdk下载链接](http://localhost/link)
+[wcs-php-sdk下载链接](https://wcsd.chinanetcenter.com/sdk/cnc-php-sdk-wcs.zip)
 
 ## <span id="3">使用指南</span>
 ### 准备开发环境
