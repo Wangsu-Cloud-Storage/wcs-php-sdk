@@ -29,9 +29,9 @@ class FileManager
 
     public function move($bucketSrc, $keySrc, $bucketDst, $keyDst) {
         $paramSrc = $bucketSrc . ":" . $keySrc;
-        $paramSrc = Wcs\url_safe_base64_encode($paramSrc);
+        $paramSrc = Utils::url_safe_base64_encode($paramSrc);
         $paramDst = $bucketDst . ":" . $keyDst;
-        $paramDst = Wcs\url_safe_base64_encode($paramDst);
+        $paramDst = Utils::url_safe_base64_encode($paramDst);
 
         $url = Config::WCS_MGR_URL . "/move/" . $paramSrc . "/" . $paramDst;
 
@@ -53,9 +53,9 @@ class FileManager
     public function copy($bucketSrc, $keySrc, $bucketDst, $keyDst) {
         //encodeEntryUrl bucket:key
         $paramSrc = $bucketSrc . ":" . $keySrc;
-        $paramSrc = Wcs\url_safe_base64_encode($paramSrc);
+        $paramSrc = Utils::url_safe_base64_encode($paramSrc);
         $paramDst = $bucketDst . ":" . $keyDst;
-        $paramDst = Wcs\url_safe_base64_encode($paramDst);
+        $paramDst = Utils::url_safe_base64_encode($paramDst);
 
         $url = Config::WCS_MGR_URL . "/copy/" . $paramSrc . "/" . $paramDst;
         $headers = $this->_genernate_header($url);
@@ -153,12 +153,12 @@ class FileManager
         $files = explode($separator, $fileKeys);
         $param = $bucket.":";
         foreach ($files as $index => $file) {
-            $param .= Wcs\url_safe_base64_encode($file);
+            $param .= Utils::url_safe_base64_encode($file);
             if($index !== (sizeof($files) - 1)) {
                 $param .= "|";
             }
         }
-        $param = Wcs\url_safe_base64_encode($param);
+        $param = Utils::url_safe_base64_encode($param);
         $url .= $param;
         $headers = $this->_genernate_header($url);
         $resp = $this->_post($url, $headers);
