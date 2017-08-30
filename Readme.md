@@ -16,7 +16,7 @@ PHP SDK基于网宿云存储API规范构建，适用于大于5.4版本的PHP。
 
 ```
 "require": {
-     "wcs/wcs-sdk-php": "~2.0"
+     "wangsucs/wcs-sdk-php": "^2.0.0"
  }
 ```
 
