@@ -3,7 +3,7 @@
 namespace  Wcs;
 
 
-final class Config
+class Config
 {
     //version
     const WCS_SDK_VER = "2.0.5";
