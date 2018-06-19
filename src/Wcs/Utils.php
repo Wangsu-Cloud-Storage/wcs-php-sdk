@@ -2,7 +2,7 @@
 namespace  Wcs;
 
 use Wcs\Http\Response;
-
+use BigFileTools;
 
 class Utils
 {
@@ -119,7 +119,6 @@ class Utils
         return $ret;
     }
 
-
     public static function http_post($url, $headers, $fields, $opt = null)
     {
 
@@ -204,5 +203,14 @@ class Utils
             $baseUrl .= '/' . $fileName;
 
             return $baseUrl;
+    }
+
+    public static function getFileSize($filePath) {
+        $size = filesize($filePath);
+        if ($size < 0) {
+            return BigFileTools::fromPath($filePath)->getSize();
+        }
+
+        return $size;
     }
 }

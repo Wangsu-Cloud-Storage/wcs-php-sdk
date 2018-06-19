@@ -6,7 +6,7 @@ namespace  Wcs;
 final class Config
 {
     //version
-    const WCS_SDK_VER = "2.0.5";
+    const WCS_SDK_VER = "2.0.6";
 
 
     //url设置
@@ -32,9 +32,9 @@ final class Config
 
     //分片上传参数设置
     const WCS_BLOCK_SIZE = 4194304; //4 * 1024 * 1024 默认块大小4M
-    const WCS_CHUNK_SIZE = 524288; //  4 * 1024 * 1024 默认片大小4M
+    const WCS_CHUNK_SIZE = 524288; //  512 * 1024 默认片大小512KB
     //const WCS_CHUNK_SIZE = 4194304; //  4 * 1024 * 1024 默认片大小4M
-    const WCS_RECORD_URL = '/root/s3-tests/upload/'; //默认当前文件目录
+    const WCS_RECORD_URL = ''; //默认当前文件目录
     const WCS_COUNT_FOR_RETRY = 3;  //超时重试次数
 
     //并发请求数目

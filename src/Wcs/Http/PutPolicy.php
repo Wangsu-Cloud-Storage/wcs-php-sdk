@@ -9,7 +9,7 @@ final class PutPolicy
 {
     /**
      * 指定上传的目标资源空间（bucektName）和资源名（fileName）
-    有两种格式：
+     * 有两种格式：
      * 1. <bucket>，表示允许用户上传文件到指定的 bucket。
      * 2. <bucket>:<filename>，表示允许用户上传指定filename
      */
@@ -18,7 +18,7 @@ final class PutPolicy
 
 
     /**
-     * 上传请求授权的截止时间, 单位为毫秒
+     * 上传请求授权的截止时间戳, 单位为毫秒
      */
     public $deadline;
 
@@ -92,7 +92,7 @@ final class PutPolicy
     public $persistentNotifyUrl;
 
     /**
-    鉴黄
+    * 鉴黄
     */
     public $contentDetect;
     public $detectNotifyURL;
@@ -103,9 +103,14 @@ final class PutPolicy
     {
         $policy = array('scope' => $this->scope);
 
-            $this->deadline = round(1000 * (microtime(true) + Config::WCS_TOKEN_DEADLINE));
-
+        if (empty($this->deadline)) {
+            $this->deadline = round(1000 * (microtime(true) + Config::WCS_TOKEN_DEADLINE), 0);
+        }
         $policy['deadline'] = $this->deadline;
+
+        if (!empty($this->deadline)) {
+            $policy['returnBody'] = $this->returnBody;
+        }
 
         if (!empty($this->returnBody)) {
             $policy['returnBody'] = $this->returnBody;

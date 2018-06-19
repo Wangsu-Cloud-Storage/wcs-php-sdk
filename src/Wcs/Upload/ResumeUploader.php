@@ -112,14 +112,11 @@ class ResumeUploader
             die("ERROR: {$this->localFile}文件不存在！");
         }
         clearstatcache();
-        $this->sizeOfFile= filesize($localFile);
-
-
+        $this->sizeOfFile= Utils::getFileSize($localFile);
 
         //如果有断点续传记录，从记录文件中读取信息
-        if(file_exists($this->recordFile) && filesize($this->recordFile) != 0) {
+        if(file_exists($this->recordFile) && Utils::getFileSize($this->recordFile) != 0) {
             //获取记录文件最后一行的记录
-            //$result = exec("tail -1 {$this->recordFile}");
             $result = $this->fileLastLines($this->recordFile);
             if ($result !== false) {
                 $result = json_decode($result, true);
@@ -140,7 +137,6 @@ class ResumeUploader
         $resp = $this->resumeUpload();
 
         return $resp;
-
     }
 
     /**
@@ -191,11 +187,8 @@ class ResumeUploader
         }
         $this->rcdFileHandle = $recordFile;
 
-
         //片大小必须是块大小的整数倍
         $blockNum = ceil($this->sizeOfFile / ($this->blockSize));
-
-
 
         $client = new Client(['timeout' => Config::WCS_TIMEOUT]);
 
@@ -210,10 +203,7 @@ class ResumeUploader
                 $this->hash[$count ++] = $i;
             }
 
-
             for ($curBlockNum = 0; $curBlockNum < $blockNum; $curBlockNum ++) {
-
-
                 if(isset($this->hashTable[$curBlockNum]['success'])) {
                     $uploadStatus = $this->hashTable[$curBlockNum]['success'];
                     if($uploadStatus == true) {
@@ -235,15 +225,13 @@ class ResumeUploader
                     $curBlockSize = $this->blockSize;
                 }
 
-
-
                 $chunkNum = ceil(($curBlockSize) / ($this->chunkSize));
 
                 $url = Config::WCS_PUT_URL . '/mkblk/' . $curBlockSize . '/' . $curBlockNum;
                 //mkblk
                 //如果当前文件剩余内容小于chunkSize,只会读取到EOF
                 //定位到文件上次中断的位置
-                $offset = $curBlockNum * $this->blockSize;
+                $offset = round($curBlockNum * $this->blockSize, 0);
 
                 if (fseek($this->handle, $offset, SEEK_SET) == -1) {
                     fwrite($this->rcdLogHandle, date('Y-m-d H:i:s') . " " . "ERROR:读取文件出错！\n");
@@ -320,12 +308,11 @@ class ResumeUploader
         $promise = $pool->promise();
         $promise->wait();
 
-        if (filesize($this->recordFile) == 0) {
+        if (Utils::getFileSize($this->recordFile) == 0) {
             $this->deleteRecord($this->recordFile);
         }
         //检验上传文件完整性
         if ($this->hashTable['info']['sizeOfUploaded'] == $this->sizeOfFile) {
-
             $resp = $this->mkfile($this->token);
 
             //超时重试
@@ -342,7 +329,6 @@ class ResumeUploader
         fclose($recordFile);
         fclose($handle);
         return $resp;
-
     }
 
     function mkblkResume($body, $index) {
@@ -351,23 +337,22 @@ class ResumeUploader
         $this->hashTable[$index]['latestCtx'] = $latestCtx;
         $this->hashTable[$index]['chunk'] += 1;
         $this->hashTable[$index]['uploaded'] +=
-            $this->hashTable[$index]['curChunkSize'];
+        $this->hashTable[$index]['curChunkSize'];
         $chunk = $this->hashTable[$index]['chunk'];
         $chunkNum = $this->hashTable[$index]['chunkNum'];
 
         $this->hashTable['info']['sizeOfUploaded'] +=
-            $this->hashTable[$index]['curChunkSize'];
+        $this->hashTable[$index]['curChunkSize'];
 
         //记录上传进度
         $this->hashTable['info']['progress'] =
-            $this->hashTable['info']['sizeOfUploaded'] / $this->hashTable['info']['sizeOfFile'] * 100;
+        $this->hashTable['info']['sizeOfUploaded'] / $this->hashTable['info']['sizeOfFile'] * 100;
 
         // 给文件加排它锁
         if (flock($this->rcdFileHandle, LOCK_EX)) {
             fwrite($this->rcdFileHandle, json_encode($this->hashTable)."\n");
             flock($this->rcdFileHandle, LOCK_UN);
         }
-
 
         for ($i = $chunk; $i < $chunkNum; $i ++) {
             //bput
@@ -420,7 +405,6 @@ class ResumeUploader
             throw new \ErrorException('块上传校验失败！');
 
         }
-
     }
 
     /**
@@ -445,7 +429,6 @@ class ResumeUploader
         $resp = Utils::http_post($url, $httpHeaders, $fields);
 
         return $resp;
-
     }
 
     /**
@@ -471,8 +454,6 @@ class ResumeUploader
         $resp = Utils::http_post($url, $httpHeaders, $fields);
 
         return $resp;
-
-
     }
 
     /**
@@ -507,7 +488,6 @@ class ResumeUploader
         $resp = Utils::http_post($url, $httpHeaders, $fields);
 
         return $resp;
-
     }
 
     /**
@@ -526,7 +506,7 @@ class ResumeUploader
             return true;
         }
         else {
-            if(filesize($this->recordFile) == 0) {
+            if(Utils::getFileSize($this->recordFile) == 0) {
                 $this->deleteRecord($this->recordFile);
             }
             if($resp->code == 28) {
@@ -548,17 +528,15 @@ class ResumeUploader
      */
     function  bputHandler($resp, $index, $curChunkSize) {
         if($resp->code == 200) {
-
             $this->hashTable[$index]['uploaded'] += $curChunkSize;
             $this->hashTable[$index]['curChunkSize'] = $curChunkSize;
             $this->hashTable[$index]['chunk'] += 1;
-
 
             $result = json_decode($resp->respBody, true);
             $this->hashTable[$index]['latestCtx'] = $result['ctx'];
 
             $this->hashTable['info']['sizeOfUploaded'] +=
-                $this->hashTable[$index]['curChunkSize'];
+            $this->hashTable[$index]['curChunkSize'];
 
             if($this->hashTable[$index]['uploaded'] == $this->hashTable[$index]['blockSize']) {
                 $this->hashTable[$index]['success'] = true;
@@ -566,7 +544,7 @@ class ResumeUploader
 
             //记录上传进度
             $this->hashTable['info']['progress'] =
-                $this->hashTable['info']['sizeOfUploaded'] / $this->hashTable['info']['sizeOfFile'] * 100;
+            $this->hashTable['info']['sizeOfUploaded'] / $this->hashTable['info']['sizeOfFile'] * 100;
 
             //是否输出上传进度
             print_r("progress: ".$this->hashTable['info']['progress']."%\n");
@@ -576,7 +554,6 @@ class ResumeUploader
             return true;
         }
         else {
-
             if($resp->code == 28) {
                 fwrite($this->rcdLogHandle, date('Y-m-d H:i:s') . " " . "请求超时！" ."\n");
                 throw new \Exception('请求超时！');
@@ -585,7 +562,6 @@ class ResumeUploader
                 fwrite($this->rcdLogHandle, date('Y-m-d H:i:s') . " " . json_encode($resp)."\n");
                 throw new \Exception($resp->respBody);
             }
-
         }
     }
 
