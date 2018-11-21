@@ -1,6 +1,6 @@
 <?php 
 /**
- * 最新版本 在 https://github.com/qiniu/php-sdk/blob/master/src/Qiniu/Etag.php
+ * Etag算法
  */
 define('BLOCK_BITS', 22);
 define('BLOCK_SIZE', 1 << BLOCK_BITS);
