@@ -33,7 +33,7 @@ class FileManager
         $paramDst = $bucketDst . ":" . $keyDst;
         $paramDst = Utils::url_safe_base64_encode($paramDst);
 
-        $url = Config::WCS_MGR_URL . "/move/" . $paramSrc . "/" . $paramDst;
+        $url = Utils::parse_url(Config::WCS_MGR_URL) . "/move/" . $paramSrc . "/" . $paramDst;
 
         $headers = $this->_genernate_header($url);
 
@@ -57,7 +57,7 @@ class FileManager
         $paramDst = $bucketDst . ":" . $keyDst;
         $paramDst = Utils::url_safe_base64_encode($paramDst);
 
-        $url = Config::WCS_MGR_URL . "/copy/" . $paramSrc . "/" . $paramDst;
+        $url = Utils::parse_url(Config::WCS_MGR_URL) . "/copy/" . $paramSrc . "/" . $paramDst;
         $headers = $this->_genernate_header($url);
 
         $resp = $this->_post($url, $headers);
@@ -77,7 +77,7 @@ class FileManager
         $entry = $bucketName . ':' . $fileKey;
         $encodedEntry = Utils::url_safe_base64_encode($entry);
 
-        $url = Config::WCS_MGR_URL . '/delete/' . $encodedEntry;
+        $url = Utils::parse_url(Config::WCS_MGR_URL) . '/delete/' . $encodedEntry;
         $headers = $this->_genernate_header($url);
 
         return $this->_post($url, $headers);
@@ -95,7 +95,7 @@ class FileManager
         $encodedEntry = Utils::url_safe_base64_encode($entry);
 
 
-        $url = Config::WCS_MGR_URL . '/stat/' . $encodedEntry;
+        $url = Utils::parse_url(Config::WCS_MGR_URL) . '/stat/' . $encodedEntry;
         $headers = $this->_genernate_header($url);
 
         return $this->_get($url, $headers);
@@ -115,7 +115,7 @@ class FileManager
         $encodekey = Utils::url_safe_base64_encode($fileKey);
         $body = 'bucket='.$encodebucket.'&'.'key='.$encodekey.'&'.'deadline='.$deadline;
 
-        $url = Config::WCS_MGR_URL.'/setdeadline';
+        $url = Utils::parse_url(Config::WCS_MGR_URL).'/setdeadline';
         $headers = $this->_genernate_header($url, $body);
         return $this->_post($url, $headers, $body);
     }
@@ -136,7 +136,7 @@ class FileManager
             $path .= "&marker=$marker";
         }
 
-        $url = Config::WCS_MGR_URL . $path;
+        $url = Utils::parse_url(Config::WCS_MGR_URL) . $path;
         $headers = $this->_genernate_header($url);
         $resp = $this->_get($url, $headers);
         return $resp;
@@ -148,7 +148,7 @@ class FileManager
      * @param $fileKeys
      */
     public function updateMirrorSrc($bucket, $fileKeys) {
-        $url = Config::WCS_MGR_URL . '/prefetch/';
+        $url = Utils::parse_url(Config::WCS_MGR_URL) . '/prefetch/';
         $separator = "|";
         $files = explode($separator, $fileKeys);
         $param = $bucket.":";

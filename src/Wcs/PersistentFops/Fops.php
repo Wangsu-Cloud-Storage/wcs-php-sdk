@@ -33,7 +33,7 @@ class Fops {
      * @return mixed
      */
     public function exec($fops, $key, $notifyURL=null, $force=0, $separate=0) {
-        $url = Config::WCS_MGR_URL . '/fops';
+        $url = Utils::parse_url(Config::WCS_MGR_URL) . '/fops';
         $encodebucket = Utils::url_safe_base64_encode(($this->bucket));
         $body = 'bucket='.$encodebucket;
         $body .= '&key=' . Utils::url_safe_base64_encode($key);
@@ -55,7 +55,7 @@ class Fops {
      * @return mixed
      */
     public static function status($persistentId) {
-        $url = Config::WCS_MGR_URL . '/status/get/prefop?persistentId=' . $persistentId;
+        $url = Utils::parse_url(Config::WCS_MGR_URL) . '/status/get/prefop?persistentId=' . $persistentId;
         $resp = Utils::http_get($url, null);
 
         return $resp;

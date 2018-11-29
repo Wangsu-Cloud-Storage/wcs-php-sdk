@@ -7,6 +7,20 @@ use BigFileTools;
 class Utils
 {
     /**
+     * 识别uploadDomain,mgrDomain是否有http://前缀，没有就补充
+     * @param $url
+     * @return string
+     */
+    public static function parse_url($url) {
+        if ((strpos($url, 'http://') === false) and (strpos($url, 'https://') === false)) {
+            # 自动补全http://前缀
+            $url = 'http://'.$url;
+        }
+
+        return $url;
+    }
+
+    /**
     * @param $str
     * @return mixed
     */

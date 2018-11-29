@@ -19,7 +19,7 @@ $key = Utils::url_safe_base64_encode('<input key>');
 $prefix = Utils::url_safe_base64_encode('<input key>');
 //$md5 = null;
 
-$fops = 'fops=fetchURL/'.$fetchURL.'/bucket/'.$bucket.'/key/'.$key.'/prefix/'.$prefix.'&notifyURL='.Utils::url_safe_base64_encode($notifyURL).'&force='.$force.'&separate='.$separate;
+$fops = 'fops=fetchURL/'.$fetchURL.'/bucket/'.$bucket.'/key/'.$key.'/prefix/'.$prefix.'&notifyURL='.Utils::url_safe_base64_encode($notifyURL);
 
 $ak = Config::WCS_ACCESS_KEY;
 $sk = Config::WCS_SECRET_KEY;

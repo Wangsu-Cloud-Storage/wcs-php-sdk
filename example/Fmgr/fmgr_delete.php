@@ -16,7 +16,7 @@ $separate  = 0;
 $bucket = Utils::url_safe_base64_encode('<input key>');
 $key = Utils::url_safe_base64_encode('<input key>');
 
-$fops = 'fops=bucket/'.$bucket.'/key/'.$key.'&notifyURL='.Utils::url_safe_base64_encode($notifyURL).'&force='.$force.'&separate='.$separate;
+$fops = 'fops=bucket/'.$bucket.'/key/'.$key.'&notifyURL='.Utils::url_safe_base64_encode($notifyURL);
 
 $ak = Config::WCS_ACCESS_KEY;
 $sk = Config::WCS_SECRET_KEY;

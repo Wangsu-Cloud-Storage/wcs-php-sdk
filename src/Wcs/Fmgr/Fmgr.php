@@ -67,7 +67,7 @@ class Fmgr {
     }
     public function fetch($fops) {
 
-        $url = Config::WCS_MGR_URL . "/fmgr/fetch";
+        $url = Utils::parse_url(Config::WCS_MGR_URL) . "/fmgr/fetch";
         $signingStr = "/fmgr/fetch" . "\n";
         $content = $this->_addContent($fops);
 
@@ -93,7 +93,7 @@ class Fmgr {
      */
     public function copy($fops) {
 
-        $url = Config::WCS_MGR_URL . "/fmgr/copy";
+        $url = Utils::parse_url(Config::WCS_MGR_URL) . "/fmgr/copy";
         $signingStr = "/fmgr/copy" . "\n";
         $content = $this->_addContent($fops);
         $headers = $this->_genernate_header($url, $content);
@@ -115,7 +115,7 @@ class Fmgr {
      */
     public function move($fops) {
 
-        $url = Config::WCS_MGR_URL . "/fmgr/move";
+        $url = Utils::parse_url(Config::WCS_MGR_URL) . "/fmgr/move";
         $signingStr = "/fmgr/move" . "\n";
         $content = $this->_addContent($fops);
         $headers = $this->_genernate_header($url, $content);
@@ -135,8 +135,29 @@ class Fmgr {
      */
     public function delete($fops) {
 
-        $url = Config::WCS_MGR_URL . "/fmgr/delete";
+        $url = Utils::parse_url(Config::WCS_MGR_URL) . "/fmgr/delete";
         $signingStr = "/fmgr/delete" . "\n";
+        $content = $this->_addContent($fops);
+        $headers = $this->_genernate_header($url, $content);
+        $resp = $this->_post($url, $headers, $content);
+
+        return $resp;
+    }
+
+    /**
+     * 删除m3u8资源,fops格式如下
+     *fops=bucket/<Urlsafe_Base64_Encoded_bucket>
+        /key/<Urlsafe_Base64_Encoded_key>
+        /deletets/<deletets>
+        &notifyURL =<Urlsafe_Base64_Encoded_notifyUrl>
+        &eparate=<Separate>
+     * @param $fops
+     * @return mixed
+     */
+    public function deleteM3u8($fops) {
+
+        $url = Utils::parse_url(Config::WCS_MGR_URL) . "/fmgr/deletem3u8";
+        $signingStr = "/fmgr/deletem3u8" . "\n";
         $content = $this->_addContent($fops);
         $headers = $this->_genernate_header($url, $content);
         $resp = $this->_post($url, $headers, $content);
@@ -156,7 +177,7 @@ class Fmgr {
      * @return mixed
      */
     public function deletePrefix($fops) {
-        $url = Config::WCS_MGR_URL . "/fmgr/deletePrefix";
+        $url = Utils::parse_url(Config::WCS_MGR_URL) . "/fmgr/deletePrefix";
         $signingStr = "/fmgr/deletePrefix" . "\n";
         $content = $this->_addContent($fops);
         $headers = $this->_genernate_header($url, $content);
@@ -171,7 +192,7 @@ class Fmgr {
      * @return mixed
      */
     public function status($persistentId) {
-        $url = Config::WCS_MGR_URL . "/fmgr/status?persistentId=" . $persistentId;
+        $url = Utils::parse_url(Config::WCS_MGR_URL) . "/fmgr/status?persistentId=" . $persistentId;
         $resp = Utils::http_get($url, null);
 
         return $resp;

@@ -52,7 +52,7 @@ class StreamUploader
         $fp = fopen($filename, "w+b");
         fwrite($fp, $content);
         rewind($fp);
-        $url = Config::WCS_PUT_URL . '/file/upload';
+        $url = Utils::parse_url(Config::WCS_PUT_URL) . '/file/upload';
 
         $mimeType = null;
         $fields = array(

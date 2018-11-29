@@ -227,7 +227,7 @@ class ResumeUploader
 
                 $chunkNum = ceil(($curBlockSize) / ($this->chunkSize));
 
-                $url = Config::WCS_PUT_URL . '/mkblk/' . $curBlockSize . '/' . $curBlockNum;
+                $url = Utils::parse_url(Config::WCS_PUT_URL) . '/mkblk/' . $curBlockSize . '/' . $curBlockNum;
                 //mkblk
                 //如果当前文件剩余内容小于chunkSize,只会读取到EOF
                 //定位到文件上次中断的位置
@@ -416,7 +416,7 @@ class ResumeUploader
      * @return Wcs\Http\Response
      */
     function mkblk($curBlockSize, $curBlockNum, $token, $nextChunk) {
-        $url = Config::WCS_PUT_URL . '/mkblk/' . $curBlockSize . '/' . $curBlockNum;
+        $url = Utils::parse_url(Config::WCS_PUT_URL) . '/mkblk/' . $curBlockSize . '/' . $curBlockNum;
         $mimeType = null;
 
         $httpHeaders = array(
@@ -440,7 +440,7 @@ class ResumeUploader
      * @return Wcs\Http\Response
      */
     function  bput($ctx, $nextChunkOffset, $token, $nextChunk) {
-        $url = Config::WCS_PUT_URL . '/bput/' . $ctx . '/' . $nextChunkOffset;
+        $url = Utils::parse_url(Config::WCS_PUT_URL) . '/bput/' . $ctx . '/' . $nextChunkOffset;
         $mimeType = null;
 
         $httpHeaders = array(
@@ -462,7 +462,7 @@ class ResumeUploader
      * @return Wcs\Http\Response
      */
     function mkfile($token) {
-        $url = Config::WCS_PUT_URL . '/mkfile/' . $this->sizeOfFile . '/';
+        $url = Utils::parse_url(Config::WCS_PUT_URL) . '/mkfile/' . $this->sizeOfFile . '/';
 
         if($this->userParam !== null) {
             $url .= $this->userParam.'/';
