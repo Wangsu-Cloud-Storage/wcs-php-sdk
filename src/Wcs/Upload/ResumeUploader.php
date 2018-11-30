@@ -190,7 +190,7 @@ class ResumeUploader
         //片大小必须是块大小的整数倍
         $blockNum = ceil($this->sizeOfFile / ($this->blockSize));
 
-        $client = new Client(['timeout' => Config::WCS_TIMEOUT]);
+        $client = new Client(['timeout' => Config::WCS_TIMEOUT,'User-Agent' =>Utils::get_user_agent()]);
 
         $requests = function ($blockNum) {
 
@@ -256,6 +256,7 @@ class ResumeUploader
                 if(!isset($this->hashTable[$i]) || $this->hashTable[$i]['success'] == false) {
                     yield new Request('POST', $url, [
                         'Authorization' => $this->token,
+                        'User-Agent' =>Utils::get_user_agent(),
                         'Content-Type' => 'application/octet-stream',
                         'uploadBatch' => $this->uuid
                     ], $curChunk);
