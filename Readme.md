@@ -111,7 +111,7 @@ $ php file_upload_callback.php [-h | --help] -b <bucketName> -f <fileKey> -l <lo
 $ php file_upload_notify.php [-h | --help] -b <bucketName> -f <fileKey> -l <localFile> -n <notifyUrl> -c <cmd> [-u <userParam>] [-v <userVars>] [-m <mimeType>]
 ```
 ### 分片上传
-分片上传，当前PHP版本不支持并发上传，分片上传大致流程如下：
+分片上传，分片上传大致流程如下：
 1. mkblk(每一块上传前必须先mkblk操作，服务器返回第一片ctx)
 2. bput(mkblk之后进行bput操作，上传每一片附带上一片的ctx并返回当前的ctx)
 3. mkfile(当文件上传完毕，进行mkfile操作，附带每一块的最有一片ctx信息)
