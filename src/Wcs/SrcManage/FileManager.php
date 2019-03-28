@@ -102,12 +102,10 @@ class FileManager
     }
 
     /**
-     * 列举资源
-     * @param   $bucket
-     * @param   $limit
-     * @param   $prefix
-     * @param   $mode
-     * @param   $marker
+     * 设置文件过期时间
+     * @param   $bucketName 空间名
+     * @param   $fileKey 文件名
+     * @param   $deadline 过期时间
      */
     public function setDeadline($bucketName, $fileKey,$deadline)
     {
@@ -119,7 +117,18 @@ class FileManager
         $headers = $this->_genernate_header($url, $body);
         return $this->_post($url, $headers, $body);
     }
-    public function bucketList($bucket, $limit = 1000, $prefix = null, $mode = null, $marker = null)
+
+    /**
+     * 列举资源
+     * @param   $bucket
+     * @param   $limit
+     * @param   $prefix
+     * @param   $startTime
+     * @param   $endTime
+     * @param   $mode
+     * @param   $marker
+     */
+    public function bucketList($bucket, $limit = 1000, $prefix = null, $mode = null, $marker = null, $startTime = null, $endTime = null)
     {
 
         $path = '/list';
@@ -132,6 +141,12 @@ class FileManager
         if($mode !== null) {
             $path .= "&mode=$mode";
         }
+        if($startTime !== null) {
+            $path .= "&startTime=$startTime";
+        }
+        if($endTime !== null) {
+            $path .= "&endTime=$endTime";
+        }
         if($marker !== null) {
             $path .= "&marker=$marker";
         }
@@ -140,7 +155,6 @@ class FileManager
         $headers = $this->_genernate_header($url);
         $resp = $this->_get($url, $headers);
         return $resp;
-
     }
 
      /**

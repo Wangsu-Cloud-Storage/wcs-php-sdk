@@ -5,9 +5,9 @@ use Wcs\MgrAuth;
 use Wcs\Config;
 
 function print_help() {
-    echo "Usage: php file_list.php [-h | --help] -b <bucketName> [-l <limit>] [-p <prefix>] [-m <mode>] [-M <marker>]\n";
+    echo "Usage: php file_list.php [-h | --help] -b <bucketName> [-l <limit>] [-p <prefix>] [-m <mode>] [-M <marker>] [-s <startTime>] [-e <endTime>]\n";
 }
-$opts = "hb:l:p:m:M:";
+$opts = "hb:l:p:m:M:s:e:";
 $longopts = array (
     'h',
     'help',
@@ -29,12 +29,17 @@ $limit = isset($options['l']) ? $options['l'] : 1000;
 $prefix = isset($options['p']) ? $options['p'] : null;
 $mode = isset($options['m']) ? $options['m'] : null;
 $marker= isset($options['M']) ? $options['M'] : null;
+$startTime= isset($options['s']) ? $options['s'] : null;
+$endTime= isset($options['e']) ? $options['e'] : null;
+
 
 print("bucket: \t$bucketName\n");
 print("limit: \t$limit\n");
 print("prefix: \t$prefix\n");
 print("mode: \t$mode\n");
 print("marker: \t$marker\n");
+print("startTime: \t$startTime\n");
+print("endTime: \t$marker\n");
 
 print("\n");
 
@@ -44,6 +49,6 @@ $sk = Config::WCS_SECRET_KEY;
 $auth = new MgrAuth($ak, $sk);
 
 $client = new FileManager($auth);
-$res = $client->bucketList($bucketName, $limit, $prefix, $mode, $marker);
+$res = $client->bucketList($bucketName, $limit, $prefix, $mode, $marker, $startTime, $endTime);
 print_r($res->code." ".$res->respBody);
 print("\n");

@@ -6,7 +6,7 @@ namespace  Wcs;
 final class Config
 {
     //version
-    const WCS_SDK_VER = "2.0.6";
+    const WCS_SDK_VER = "2.0.8";
 
 
     //url设置
@@ -22,7 +22,7 @@ final class Config
     const  WCS_TOKEN_DEADLINE = 3600;
 
     //上传文件设置
-    const WCS_OVERWRITE = 1; //默认文件不覆盖
+    const WCS_OVERWRITE = 0; //默认文件不覆盖
     //超时时间
     const WCS_TIMEOUT = 30;
     const WCS_CONNECTTIMEOUT = 30;
@@ -32,15 +32,11 @@ final class Config
 
     //分片上传参数设置
     const WCS_BLOCK_SIZE = 4194304; //4 * 1024 * 1024 默认块大小4M
-    const WCS_CHUNK_SIZE = 524288; //  512 * 1024 默认片大小512KB
-    //const WCS_CHUNK_SIZE = 4194304; //  4 * 1024 * 1024 默认片大小4M
+    const WCS_CHUNK_SIZE = 4194304; //  4 * 1024 * 1024 默认不分片
     const WCS_RECORD_URL = ''; //默认当前文件目录
     const WCS_COUNT_FOR_RETRY = 3;  //超时重试次数
 
     //并发请求数目
     const WCS_CONCURRENCY = 5;
-
-
-
 }
 
