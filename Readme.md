@@ -21,7 +21,7 @@
 }
 ```
 
-2. 也可下载(PHP SDK)[https://wcsd.chinanetcenter.com/sdk/cnc-php-sdk-wcs.zip]后，手动导入
+2. 也可下载(PHP SDK)[https://wcsd.chinanetcenter.com/sdk/cnc-php-sdk-wcs.zip] 后，手动导入
 ```
 require_once __DIR__ . '/vendor/autoload.php';
 ```
