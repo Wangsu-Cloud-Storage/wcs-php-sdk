@@ -21,10 +21,12 @@
 }
 ```
 
-2. 也可下载(PHP SDK)[https://wcsd.chinanetcenter.com/sdk/cnc-php-sdk-wcs.zip] 后，手动导入
+2. 也可下载[PHP SDK](https://wcsd.chinanetcenter.com/sdk/cnc-php-sdk-wcs.zip) 后，手动导入
 ```
 require_once __DIR__ . '/vendor/autoload.php';
 ```
+
+3. PHP SDK加入了并发机制，网络情况不理想时可能出现并发原因导致的异常，可使用无并发机制的[简化版](http://doc-pics.w.wcsapi.biz.matocloud.com/sdk/cnc-php-sdk-wcs-sample.zip)
 
 ## 初始化配置说明
 用户接入网宿云存储时，需要使用一对有效的AK和SK进行签名认证，并填写“上传域名”和“管理域名”等信息进行文件操作。配置信息只需要在整个应用程序中初始化一次即可，具体操作如下：
