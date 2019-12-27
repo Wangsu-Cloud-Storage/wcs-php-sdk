@@ -27,6 +27,54 @@ class FileManager
         return $headers;
     }
 
+    /**
+     * 获取空间列表
+     * @return mixed
+     */
+    public function bucketsList()
+    {
+        $url = Utils::parse_url(Config::WCS_MGR_URL) . '/bucket/list';
+        $headers = $this->_genernate_header($url);
+
+        return $this->_get($url, $headers);
+    }
+
+    /**
+     * 获取空间存储量信息
+     * @param $bucketName
+     * @param $fileKey
+     * @return mixed
+     */
+    public function bucketStat($buckets, $startDate = null, $endDate = null, $isListDetails = null, $storageType = null)
+    {
+        if (!is_array($buckets) && is_string($buckets)) {
+            $buckets = array($buckets);
+        }
+
+        $name = Utils::url_safe_base64_encode(implode('|', $buckets));
+
+        $path = '/bucket/stat';
+        $path .= "?name=$name";
+        if($startDate !== null) {
+            $path.= "&startdate=$startDate";
+        }
+        if($endDate !== null) {
+            $path.= "&enddate=$endDate";
+        }
+        if($isListDetails !== null) {
+            $path.= "&isListDetails=$isListDetails";
+        }
+        if($storageType !== null) {
+            $path.= "&storageType=$storageType";
+        }
+
+        $url = Utils::parse_url(Config::WCS_MGR_URL) . $path;
+
+        $headers = $this->_genernate_header($url);
+
+        return $this->_get($url, $headers);
+    }
+
     public function move($bucketSrc, $keySrc, $bucketDst, $keyDst) {
         $paramSrc = $bucketSrc . ":" . $keySrc;
         $paramSrc = Utils::url_safe_base64_encode($paramSrc);
@@ -83,6 +131,7 @@ class FileManager
         return $this->_post($url, $headers);
 
     }
+
     /**
      * 获取文件信息
      * @param $bucketName

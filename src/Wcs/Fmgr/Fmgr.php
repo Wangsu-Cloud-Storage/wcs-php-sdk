@@ -165,7 +165,6 @@ class Fmgr {
         return $resp;
     }
 
-
     /**
      * 按前缀删除资源, fops格式如下
      * fops=bucket/<Urlsafe_Base64_Encoded_bucket>
@@ -179,6 +178,26 @@ class Fmgr {
     public function deletePrefix($fops) {
         $url = Utils::parse_url(Config::WCS_MGR_URL) . "/fmgr/deletePrefix";
         $signingStr = "/fmgr/deletePrefix" . "\n";
+        $content = $this->_addContent($fops);
+        $headers = $this->_genernate_header($url, $content);
+        $resp = $this->_post($url, $headers,$content);
+
+        return $resp;
+    }
+
+    /**
+     * 指定多文件进行打包压缩, fops格式如下
+     * fops=bucket/<Urlsafe_Base64_Encoded_Bucket>
+        /keys/<Urlsafe_Base64_Encoded_key1|Urlsafe_Base64_Encoded_key2|Urlsafe_Base64_Encoded_key3|……>
+        /keyList/<Urlsafe_Base64_Encoded_keyList>
+        &notifyURL =<Urlsafe_Base64_Encoded_notifyUrl>
+        &separate=<Separate>
+     * @param $fops
+     * @return mixed
+     */
+    public function compress($fops) {
+        $url = Utils::parse_url(Config::WCS_MGR_URL) . "/fmgr/compress";
+        $signingStr = "/fmgr/compress" . "\n";
         $content = $this->_addContent($fops);
         $headers = $this->_genernate_header($url, $content);
         $resp = $this->_post($url, $headers,$content);
