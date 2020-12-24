@@ -6,7 +6,7 @@ namespace  Wcs;
 final class Config
 {
     //version
-    const WCS_SDK_VER = "2.0.8";
+    const WCS_SDK_VER = "2.0.10";
 
 
     //url设置
