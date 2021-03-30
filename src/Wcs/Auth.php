@@ -11,7 +11,7 @@ class Auth
             return $mac;
         }
 
-        return new Mac(Config::WCS_ACCESS_KEY, Config::WCS_SECRET_KEY );
+        return new Mac(Config::get('WCS_ACCESS_KEY'), Config::get('WCS_SECRET_KEY') );
     }
 
     public static function get_token($mac, $data)

@@ -20,7 +20,7 @@ class WsLive
     }
     public function wslive_list($channelname, $startTime, $endTime, $bucket, $start=null, $limit=null)
     {
-        $url = Utils::parse_url(Config::WCS_MGR_URL).'/wslive/list';
+        $url = Utils::parse_url(Config::get('WCS_MGR_URL')).'/wslive/list';
         $query = "channelname=".$channelname."&startTime=".$startTime."&endTime=".$endTime."&bucket=".$bucket;
         if($start)
         {

@@ -42,7 +42,7 @@ print("operation: \t$cmd\n");
 print("\n");
 
 $pp = new PutPolicy();
-$pp->overwrite = Config::WCS_OVERWRITE;
+$pp->overwrite = Config::get('WCS_OVERWRITE');
 if ($fileKey == null || $fileKey === '') {
     $pp->scope = $bucketName;
 } else {

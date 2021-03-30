@@ -38,5 +38,9 @@ final class Config
 
     //并发请求数目
     const WCS_CONCURRENCY = 5;
+
+    public static function get($key) {
+        return isset($_ENV[$key]) ? $_ENV[$key] : constant("self::$key");
+    }
 }
 

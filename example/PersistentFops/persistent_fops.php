@@ -13,8 +13,8 @@ $notifyURL = 'http://callback-test.wcs.biz.matocloud.com:8088/notifyUrl';
 $force = 0;
 $separate = 0;
 
-$ak = Config::WCS_ACCESS_KEY;
-$sk = Config::WCS_SECRET_KEY;
+$ak = Config::get('WCS_ACCESS_KEY');
+$sk = Config::get('WCS_SECRET_KEY');
 $auth = new MgrAuth($ak, $sk);
 
 $fops = 'vframe/jpg/offset/10/w/1000/h/1000|saveas/bGFpaHktdGVzdDp2ZnJhbWUtdGVzdC0yNy5qcGc=';

@@ -196,8 +196,8 @@ use Wcs\SrcManage\FileManager;
 use Wcs\MgrAuth;
 use Wcs\Config;
 
-$ak = Config::WCS_ACCESS_KEY
-$sk = Config::WCS_SECRET_KEY;
+$ak = Config::get('WCS_ACCESS_KEY')
+$sk = Config::get('WCS_SECRET_KEY');
 $auth = new MgrAuth($ak, $sk);
 
 $client = new FileManager($auth);
@@ -218,8 +218,8 @@ use Wcs\SrcManage\FileManager;
 use Wcs\MgrAuth;
 use Wcs\Config;
 
-$ak = Config::WCS_ACCESS_KEY;
-$sk = Config::WCS_SECRET_KEY;
+$ak = Config::get('WCS_ACCESS_KEY');
+$sk = Config::get('WCS_SECRET_KEY');
 $auth = new MgrAuth($ak, $sk);
 
 $client = new FileManager($auth);
@@ -239,8 +239,8 @@ use Wcs\SrcManage\FileManager;
 use Wcs\MgrAuth;
 use Wcs\Config;
 
-$ak = Config::WCS_ACCESS_KEY;
-$sk = Config::WCS_SECRET_KEY;
+$ak = Config::get('WCS_ACCESS_KEY');
+$sk = Config::get('WCS_SECRET_KEY');
 $auth = new MgrAuth($ak, $sk);
 
 $client = new FileManager($auth);
@@ -261,8 +261,8 @@ use Wcs\SrcManage\FileManager;
 use Wcs\MgrAuth;
 use Wcs\Config;
 
-$ak = Config::WCS_ACCESS_KEY;
-$sk = Config::WCS_SECRET_KEY;
+$ak = Config::get('WCS_ACCESS_KEY');
+$sk = Config::get('WCS_SECRET_KEY');
 $auth = new MgrAuth($ak, $sk);
 
 //fileKeys = "<fileKey1>|<fileKey2>|<fileKey3>";
@@ -284,8 +284,8 @@ use Wcs\SrcManage\FileManager;
 use Wcs\MgrAuth;
 use Wcs\Config;
 
-$ak = Config::WCS_ACCESS_KEY;
-$sk = Config::WCS_SECRET_KEY;
+$ak = Config::get('WCS_ACCESS_KEY');
+$sk = Config::get('WCS_SECRET_KEY');
 $auth = new MgrAuth($ak, $sk);
 
 $client = new FileManager($auth);
@@ -306,8 +306,8 @@ use Wcs\SrcManage\FileManager;
 use Wcs\MgrAuth;
 use Wcs\Config;
 
-$ak = Config::WCS_ACCESS_KEY;
-$sk = Config::WCS_SECRET_KEY;
+$ak = Config::get('WCS_ACCESS_KEY');
+$sk = Config::get('WCS_SECRET_KEY');
 $auth = new MgrAuth($ak, $sk);
 
 $client = new FileManager($auth);
@@ -328,8 +328,8 @@ use Wcs\SrcManage\FileManager;
 use Wcs\MgrAuth;
 use Wcs\Config;
 
-$ak = Config::WCS_ACCESS_KEY;
-$sk = Config::WCS_SECRET_KEY;
+$ak = Config::get('WCS_ACCESS_KEY');
+$sk = Config::get('WCS_SECRET_KEY');
 $auth = new MgrAuth($ak, $sk);
 
 $client = new FileManager($auth);
@@ -350,8 +350,8 @@ use Wcs\SrcManage\FileManager;
 use Wcs\MgrAuth;
 use Wcs\Config;
 
-$ak = Config::WCS_ACCESS_KEY;
-$sk = Config::WCS_SECRET_KEY;
+$ak = Config::get('WCS_ACCESS_KEY');
+$sk = Config::get('WCS_SECRET_KEY');
 $auth = new MgrAuth($ak, $sk);
 
 $client = new FileManager($auth);
@@ -371,8 +371,8 @@ use Wcs\SrcManage\FileManager;
 use Wcs\MgrAuth;
 use Wcs\Config;
 
-$ak = Config::WCS_ACCESS_KEY;
-$sk = Config::WCS_SECRET_KEY;
+$ak = Config::get('WCS_ACCESS_KEY');
+$sk = Config::get('WCS_SECRET_KEY');
 $auth = new MgrAuth($ak, $sk);
 
 $client = new FileManager($auth);
@@ -505,8 +505,8 @@ $separate = 0;
 
 $fops = '';
 
-$ak = Config::WCS_ACCESS_KEY;
-$sk = Config::WCS_SECRET_KEY;
+$ak = Config::get('WCS_ACCESS_KEY');
+$sk = Config::get('WCS_SECRET_KEY');
 $auth = new MgrAuth($ak, $sk);
 
 $client = new Fops($auth, $bucket);
@@ -550,8 +550,8 @@ $prefix = Utils::url_safe_base64_encode('<input key>');
 
 $fops = 'fops=fetchURL/'.$fetchURL.'/bucket/'.$bucket.'/key/'.$key.'/prefix/'.$prefix.'&notifyURL='.Utils::url_safe_base64_encode($notifyURL).'&force='.$force.'&separate='.$separate;
 
-$ak = Config::WCS_ACCESS_KEY;
-$sk = Config::WCS_SECRET_KEY;
+$ak = Config::get('WCS_ACCESS_KEY');
+$sk = Config::get('WCS_SECRET_KEY');
 $auth = new MgrAuth($ak, $sk);
 
 $client = new Fmgr($auth, $notifyURL, $force, $separate);
@@ -580,8 +580,8 @@ $prefix = Utils::url_safe_base64_encode('<input key>');
 
 $fops = 'fops=resource/'.$resource.'/bucket/'.$bucket.'/key/'.$key.'/prefix/'.$prefix.'&notifyURL='.Utils::url_safe_base64_encode($notifyURL).'&force='.$force.'&separate='.$separate;
 
-$ak = Config::WCS_ACCESS_KEY;
-$sk = Config::WCS_SECRET_KEY;
+$ak = Config::get('WCS_ACCESS_KEY');
+$sk = Config::get('WCS_SECRET_KEY');
 $auth = new MgrAuth($ak, $sk);
 
 $client = new Fmgr($auth, $notifyURL, $force, $separate);
@@ -610,8 +610,8 @@ $prefix = Utils::url_safe_base64_encode('<input key>');
 
 $fops = 'fops=resource/'.$resource.'/bucket/'.$bucket.'/key/'.$key.'/prefix/'.$prefix.'&notifyURL='.Utils::url_safe_base64_encode($notifyURL).'&force='.$force.'&separate='.$separate;
 
-$ak = Config::WCS_ACCESS_KEY;
-$sk = Config::WCS_SECRET_KEY;
+$ak = Config::get('WCS_ACCESS_KEY');
+$sk = Config::get('WCS_SECRET_KEY');
 $auth = new MgrAuth($ak, $sk);
 
 $client = new Fmgr($auth, $notifyURL, $force, $separate);
@@ -638,8 +638,8 @@ $key = Utils::url_safe_base64_encode('<input key>');
 
 $fops = 'fops=bucket/'.$bucket.'/key/'.$key.'&notifyURL='.Utils::url_safe_base64_encode($notifyURL).'&force='.$force.'&separate='.$separate;
 
-$ak = Config::WCS_ACCESS_KEY;
-$sk = Config::WCS_SECRET_KEY;
+$ak = Config::get('WCS_ACCESS_KEY');
+$sk = Config::get('WCS_SECRET_KEY');
 $auth = new MgrAuth($ak, $sk);
 
 $client = new Fmgr($auth, $notifyURL, $force, $separate);
@@ -667,8 +667,8 @@ $output = Utils::url_safe_base64_encode('<input key>');
 
 $fops = 'fops=bucket/'.$bucket.'/prefix/'.$prefix.'&notifyURL='.Utils::url_safe_base64_encode($notifyURL).'&force='.$force.'&separate='.$separate;
 
-$ak = Config::WCS_ACCESS_KEY;
-$sk = Config::WCS_SECRET_KEY;
+$ak = Config::get('WCS_ACCESS_KEY');
+$sk = Config::get('WCS_SECRET_KEY');
 $auth = new MgrAuth($ak, $sk);
 
 $client = new Fmgr($auth, $notifyURL, $force, $separate);
@@ -688,8 +688,8 @@ $notifyURL = '';
 $force = 0;
 $separate  = 0;
 
-$ak = Config::WCS_ACCESS_KEY;
-$sk = Config::WCS_SECRET_KEY;
+$ak = Config::get('WCS_ACCESS_KEY');
+$sk = Config::get('WCS_SECRET_KEY');
 $auth = new MgrAuth($ak, $sk);
 
 $client = new Fmgr($auth, $notifyURL, $force, $separate);

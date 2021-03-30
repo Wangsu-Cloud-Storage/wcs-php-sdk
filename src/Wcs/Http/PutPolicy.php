@@ -104,7 +104,7 @@ final class PutPolicy
         $policy = array('scope' => $this->scope);
 
         if (empty($this->deadline)) {
-            $this->deadline = round(1000 * (microtime(true) + Config::WCS_TOKEN_DEADLINE), 0);
+            $this->deadline = round(1000 * (microtime(true) + Config::get('WCS_TOKEN_DEADLINE')), 0);
         }
         $policy['deadline'] = $this->deadline;
 
@@ -162,8 +162,8 @@ final class PutPolicy
     public function get_token() {
         $ppString = $this->to_string();
         $ppString = Utils::url_safe_base64_encode($ppString);
-        $ak = Config::WCS_ACCESS_KEY;
-        $sk = Config::WCS_SECRET_KEY;
+        $ak = Config::get('WCS_ACCESS_KEY');
+        $sk = Config::get('WCS_SECRET_KEY');
         $sign = hash_hmac('sha1', $ppString, $sk, false);
         return $ak.':'.Utils::url_safe_base64_encode($sign).':'.$ppString;
         #return \Wcs\get_token_with_data($config, $ppString);

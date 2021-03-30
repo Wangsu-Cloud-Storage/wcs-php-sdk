@@ -47,7 +47,7 @@ class Uploader
         if(!file_exists($localFile)) {
             die("ERROR: {$localFile}文件不存在！");
         }
-        $url = Utils::parse_url(Config::WCS_PUT_URL) . '/file/upload';
+        $url = Utils::parse_url(Config::get('WCS_PUT_URL')) . '/file/upload';
 
         $token = $this->token;
 

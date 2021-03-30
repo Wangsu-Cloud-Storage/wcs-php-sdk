@@ -32,8 +32,8 @@ print("host:: \t$key\n");
 
 print("\n");
 
-$ak = Config::WCS_ACCESS_KEY;
-$sk = Config::WCS_SECRET_KEY;
+$ak = Config::get('WCS_ACCESS_KEY');
+$sk = Config::get('WCS_SECRET_KEY');
 
 $auth = new MgrAuth($ak, $sk);
 

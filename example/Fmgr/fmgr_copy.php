@@ -21,8 +21,8 @@ $prefix = Utils::url_safe_base64_encode('<input key>');
 
 $fops = 'fops=resource/'.$resource.'/bucket/'.$bucket.'/key/'.$key.'/prefix/'.$prefix.'&notifyURL='.Utils::url_safe_base64_encode($notifyURL);
 
-$ak = Config::WCS_ACCESS_KEY;
-$sk = Config::WCS_SECRET_KEY;
+$ak = Config::get('WCS_ACCESS_KEY');
+$sk = Config::get('WCS_SECRET_KEY');
 
 $auth = new MgrAuth($ak, $sk);
 

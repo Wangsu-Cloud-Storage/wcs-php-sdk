@@ -54,7 +54,7 @@ class Utils
 
     public static function get_user_agent()
     {
-        $sdkInfo = "WCS PHP SDK /" . Config::WCS_SDK_VER . " (http://wcs.chinanetcenter.com/)";
+        $sdkInfo = "WCS PHP SDK /" . Config::get('WCS_SDK_VER') . " (http://wcs.chinanetcenter.com/)";
 
         $systemInfo = php_uname("s");
         $machineInfo = php_uname("m");
@@ -78,7 +78,7 @@ class Utils
             CURLOPT_HEADER => true,
             CURLOPT_NOBODY => false,
             CURLOPT_URL => $url,
-            CURLOPT_TIMEOUT => Config::WCS_TIMEOUT
+            CURLOPT_TIMEOUT => Config::get('WCS_TIMEOUT')
         );
 
         if($opt) {
@@ -147,8 +147,8 @@ class Utils
             CURLOPT_NOBODY => false,
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_URL => $url,
-            CURLOPT_TIMEOUT => Config::WCS_TIMEOUT,
-            CURLOPT_CONNECTTIMEOUT => Config::WCS_CONNECTTIMEOUT,
+            CURLOPT_TIMEOUT => Config::get('WCS_TIMEOUT'),
+            CURLOPT_CONNECTTIMEOUT => Config::get('WCS_CONNECTTIMEOUT'),
         );
 
         if($opt) {
@@ -208,10 +208,10 @@ class Utils
     {
         $HTTP_PREFIX = 'http://';
 
-        if (self::str_start_with(Config::WCS_GET_URL, $HTTP_PREFIX)) {
-            $baseUrl = $HTTP_PREFIX . $bucketName . '.' . substr(Config::WCS_GET_URL, strlen($HTTP_PREFIX));
+        if (self::str_start_with(Config::get('WCS_GET_URL'), $HTTP_PREFIX)) {
+            $baseUrl = $HTTP_PREFIX . $bucketName . '.' . substr(Config::get('WCS_GET_URL'), strlen($HTTP_PREFIX));
         } else {
-            $baseUrl = $bucketName . '.' . Config::WCS_GET_URL;
+            $baseUrl = $bucketName . '.' . Config::get('WCS_GET_URL');
         }
 
             $baseUrl .= '/' . $fileName;

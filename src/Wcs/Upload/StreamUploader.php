@@ -43,16 +43,16 @@ class StreamUploader
         if(!isset($content)||strlen($content)==0) {
             die("ERROR: {$Stream}流地址无效！"."\n");
         }
-        if(!is_dir(Config::WCS_RAM_URL))
+        if(!is_dir(Config::get('WCS_RAM_URL')))
         {
             die("ERROR: 虚拟内存目录不存在！");
         }
-        $filename = Config::WCS_RAM_URL."steam";
+        $filename = Config::get('WCS_RAM_URL')."steam";
 
         $fp = fopen($filename, "w+b");
         fwrite($fp, $content);
         rewind($fp);
-        $url = Utils::parse_url(Config::WCS_PUT_URL) . '/file/upload';
+        $url = Utils::parse_url(Config::get('WCS_PUT_URL')) . '/file/upload';
 
         $mimeType = null;
         $fields = array(

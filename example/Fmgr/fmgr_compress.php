@@ -25,8 +25,8 @@ if ($keys) {
     $fops = 'fops=bucket/'.$bucket.'/keys/'.$keys.'/keylist/'.$keyList.'/saveas/'.$targetSource;
 }
 
-$ak = Config::WCS_ACCESS_KEY;
-$sk = Config::WCS_SECRET_KEY;
+$ak = Config::get('WCS_ACCESS_KEY');
+$sk = Config::get('WCS_SECRET_KEY');
 
 $auth = new MgrAuth($ak, $sk);
 
