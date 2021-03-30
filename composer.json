@@ -15,5 +15,6 @@
     },
     "autoload": {
         "psr-4": {"Wcs\\": "src/Wcs"}
-    }
+    },
+    "license": "MIT"
 }
