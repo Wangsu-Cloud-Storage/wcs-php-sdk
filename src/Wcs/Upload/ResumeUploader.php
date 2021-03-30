@@ -8,7 +8,7 @@ use Wcs\Utils;
 use GuzzleHttp\Client;
 use GuzzleHttp\Pool;
 use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\TransferException;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Promise;
 
@@ -272,7 +272,7 @@ class ResumeUploader
                    $this->mkblkResume($response->getBody(), $index);
                 }
             },
-            'rejected' => function (RequestException $e, $index) {
+            'rejected' => function (TransferException $e, $index) {
                 if ($e->hasResponse() == false) {
                     fwrite($this->rcdLogHandle, date('Y-m-d H:i:s') . " " . "请求超时！" . "\n");
 
