@@ -96,8 +96,8 @@ $pp->callbackUrl = '';
 // 预处理
 $pp->persistentOps = '<cmd>';
 
-// token有效期
-$pp->deadline = '';//单位为毫秒
+// token有效期，可自定义token有效期截止时间，值为毫秒时间戳；不指定时会按照WCS_TOKEN_DEADLINE配置的有效期计算截止时间戳
+$pp->deadline = '<timestamp>'; 
 $token = $pp->get_token();
 
 $client = new Uploader($token, $userParam, $userVars, $mimeType);
@@ -175,7 +175,10 @@ if ($fileKey == null || $fileKey === '') {
 } else {
     $pp->scope = $bucketName . ':' . $fileKey;
 }
-$pp->deadline = '1483027200000';
+
+// token有效期，可自定义token有效期截止时间，值为毫秒时间戳；不指定时会按照WCS_TOKEN_DEADLINE配置的有效期计算截止时间戳
+$pp->deadline = '<timestamp>'; 
+
 $pp->persistentOps = $cmd;
 $pp->persistentNotifyUrl = $notifyUrl;
 $pp->returnBody = $returnBody;
