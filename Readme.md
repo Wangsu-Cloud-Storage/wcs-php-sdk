@@ -506,7 +506,8 @@ $notifyURL = '';
 $force = 0;
 $separate = 0;
 
-$fops = '';
+//转码指令，如转封装为mp4
+$fops = 'avthumb/mp4|saveas/YnVja2V0TmFtZTprZXlOYW1l';
 
 $ak = Config::WCS_ACCESS_KEY;
 $sk = Config::WCS_SECRET_KEY;
