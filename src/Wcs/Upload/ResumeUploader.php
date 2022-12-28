@@ -105,9 +105,12 @@ class ResumeUploader
         $this->localFile = $localFile;
 
         //记录文件后缀.rcd, WCS_RECORD_URL 为记录文件的路径，默认是上传文件当前路径
-        $this->recordFile = Config::WCS_RECORD_URL . '.' . basename($localFile) . '.rcd';
+        // 2022-12-28修改记录文件名称为完整路径的base64值，避免不同路径的同名文件上传记录相互影响
+        $recordName = Utils::url_safe_base64_encode($localFile);
+        $this->recordFile = Config::WCS_RECORD_URL . '.' . $recordName . '.rcd';
         //日志文件
-        $this->recordLog = Config::WCS_RECORD_URL . '.' . basename($localFile) . '.log';
+        $this->recordLog = Config::WCS_RECORD_URL . '.' . $recordName . '.log';
+        
         if(!file_exists($this->localFile)) {
             die("ERROR: {$this->localFile}文件不存在！");
         }
