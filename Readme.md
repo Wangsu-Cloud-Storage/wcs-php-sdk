@@ -633,3 +633,9 @@ $auth = new MgrAuth($ak, $sk);
 $client = new Fmgr($auth, $notifyURL, $force, $separate);
 print_r($client->status("<input persistentId>"));
 ```
+
+### etag计算
+通过SDK提供的方法计算本地文件的etag，可以和上传成功时服务端响应的etag对比来校验已上传成功文件的完整性
+```
+wcs_etag.GetEtag($localFile)
+```
