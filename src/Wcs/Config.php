@@ -38,5 +38,8 @@ final class Config
 
     //并发请求数目
     const WCS_CONCURRENCY = 5;
+    
+    //是否输出curl；请求信息
+    const CURLOPT_VERBOSE = true;
 }
 
