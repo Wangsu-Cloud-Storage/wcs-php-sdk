@@ -488,7 +488,7 @@ class ResumeUploader
         for($i = 0; $i < $blockNum; $i ++) {
             array_push($this->hashTable['info']['ctxList'], $this->hashTable[$i]['latestCtx']);
         }
-        $fields = implode($this->hashTable['info']['ctxList'], ",");
+        $fields = implode(",", $this->hashTable['info']['ctxList']);
         $resp = Utils::http_post($url, $httpHeaders, $fields);
 
         return $resp;
