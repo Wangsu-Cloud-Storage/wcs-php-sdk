@@ -10,9 +10,9 @@ final class Config
 
 
     //url设置
-    const WCS_PUT_URL	= 'http://PUT_URL'; //WCS put 上传路径
-    const WCS_GET_URL	= 'http://GET_URL';    //WCS get 上传路径
-    const WCS_MGR_URL	= 'http://MGR_URL';    //WCS MGR 路径
+    const WCS_PUT_URL	= 'http://PUT_URL'; //WCS put 上传域名，可在统一控制台空间概览查看
+    const WCS_GET_URL	= 'http://GET_URL';    //WCS get 下载域名，客户自定义的下载域名
+    const WCS_MGR_URL	= 'http://MGR_URL';    //WCS MGR 管理域名，可在统一控制台空间概览查看
 
     //access key and secret key
     const WCS_ACCESS_KEY	= '';
