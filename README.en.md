@@ -1,14 +1,8 @@
-## [切换到中文](README.md)
+# Cloud Storage PHP SDK
 
-- [Preparation](#preparation)
-- [Installation](#installation)
-- [Initialization](#initialization)
-- [Usage Guide](#usage-guide)
-  - [Normal Upload](#normal-upload)
-  - [Chunk Upload](#chunk-upload)
-  - [Resource Management](#resource-management)
-  - [Audio/Video Operations](#audio-video-operations)
-  - [Advanced Resource Management](#advanced-resource-management)
+## 语言 / Language
+- 简体中文：[README.md](README.md)
+- English：[README.en.md](README.en.md)
 
 ## Preparation
 * Account requirements: NetEase Cloud Storage account with upload keys and upload domain name
