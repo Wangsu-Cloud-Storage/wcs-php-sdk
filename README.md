@@ -1,8 +1,8 @@
 # 云存储 PHP SDK
 
 ## 语言 / Language
-- 简体中文：[README.md](README.zh.md)
-- English：[README.en.md](README.en.md)
+- 简体中文：[中文](README.md)
+- English：[English](README.en.md)
 
 ## 开发准备
 * 账号要求：已开通网宿云存储，并获取上传密钥，上传域名等
